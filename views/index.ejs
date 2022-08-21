@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="css/style.css" >
+    </head>
+    
+    <body>
+        <button action="" id="main-btn">Add a Book</button>
+        <section class="bookshelf">
+            <section class ="pile" id="unread-pile">
+                <h1>Books To Read</h1>
+             
+                <% booksToRead.forEach( book => { %>
+                    <div class="book unread" action="/getBookInfo"><%= book.title %></div>
+                    <% }) %>
+              
+            </section>
+            <section class="pile" id="read-pile">
+                <h1>Finished Books</h1>
+            
+               <% booksRead.forEach( book => { %>
+                <div class="book read" action="/getBookInfo"><%= book.title %></div>
+                <% }) %>
+            </section>
+        </section>
+    
+        <section class="add-book modal">
+            <form class="add-book-form" action="/addBook" method="POST">
+                <input type="text" placeholder="Title" name="title"/>
+                <input type="text" placeholder="Author" name="author"/>
+                <input type="text" placeholder="Subject" name="subject"/>
+                <div class="radio-inputs">
+                    <ul>
+                        <li><input type="radio" name="fictionOrNot" value=true > Fiction</li>
+                        <li><input type="radio" name="fictionOrNot" value=false > Non-Fiction</li>
+                    </ul>
+                    <ul>
+                        <li><input type="radio" name="readStatus" value=false > Unread</li>
+                        <li><input type="radio" name="readStatus" value=true  >Read</li>
+                    </ul>
+                </div>
+                <button class="submit-btn">Add Book</button>
+                <button class="close-btn">Close</button>
+            </form>
+        </section>
+        <section class="book-info modal">
+        <form>
+            <div id="book-title"></div>
+            <div id="book-author"></div>
+            <div id="book-subject"></div>
+        <section class="categories">
+            <div id="book-fiction"><span id="fiction">Fiction</span> | <span id="nonfiction">Non-Fiction</span></div>
+            <div id="book-read"><span id="read">Read</span> | <span id="unread">Unread</span></div>
+        </section>
+        <section class="btns">
+            <button class="markAsRead" action="/markRead" >Mark as Read</button>
+            <button class="deleteBtn" action="/deleteBook">Delete Book</button>
+            <button class="close-btn">Close</button>
+        </section>
+        </form>
+        </section>
+        
+        <script src="js/main.js"></script>
+    </body>
+</html>
