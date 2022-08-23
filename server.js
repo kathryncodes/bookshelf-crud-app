@@ -6,10 +6,10 @@ require('dotenv').config();
 
 
 let db, 
-    dbConnectionStr = process.env.DB_STRING, 
+    connectionString = process.env.DB_STRING, 
     dbName = "bookshelfDB"
 
-MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
+MongoClient.connect(connectionString, { useUnifiedTopology: true })
     .then(client => {
         db = client.db(dbName);
         console.log(`connected to ${dbName}`);
@@ -53,7 +53,6 @@ app.delete('/deleteBook', async (request, response) => {
     db.collection('books').deleteOne({title: request.body.bookToDelete})
     .then(result => {
         response.json("book deleted");
-        response.redirect('/');
     })
     .catch(err => console.log(err));
 })
@@ -71,7 +70,6 @@ app.put('/markAsRead', async (request, response) => {
         .then(result => {
             console.log("marked as read");
             response.json("marked as read");
-            response.redirect('/');
         })
         .catch(err => console.log(err));
 })
