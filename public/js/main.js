@@ -22,6 +22,7 @@ closeBtn.forEach(btn => {
         console.log("button clicked");
         addBookModal.style.display = "none";
         bookInfoModal.style.display = "none";
+        
     })
 })
 
