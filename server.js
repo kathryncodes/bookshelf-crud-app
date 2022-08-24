@@ -1,20 +1,20 @@
 const express = require('express');
 const app = express();
-const MongoClient = require('mongodb').MongoClient;
+const MongoClient = require('mongodb').MongoClient
 const PORT = process.env.PORT || 8000;
 require('dotenv').config();
 
 
 let db, 
-    connectionString = process.env.DB_STRING, 
+    dbConnectionStr = process.env.DB_STRING, 
     dbName = "bookshelfDB"
 
-MongoClient.connect(connectionString, { useUnifiedTopology: true })
+MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
     .then(client => {
         db = client.db(dbName);
-        console.log(`connected to ${dbName}`);
+        console.log(`connected to ${db}`);
     })
-    .catch(err => console.log(err));
+
 
 
 app.set('view engine', 'ejs') //setting our view engine to ejs so that the index.ejs file is rendered
