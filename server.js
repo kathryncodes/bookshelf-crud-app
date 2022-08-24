@@ -1,8 +1,17 @@
 const express = require('express');
 const app = express();
-const MongoClient = require('mongodb').MongoClient
+//const MongoClient = require('mongodb').MongoClient
 const PORT = process.env.PORT || 8000;
 require('dotenv').config();
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = process.env.DB_STRING;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
 
 
 let db, 
@@ -14,7 +23,6 @@ MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
         db = client.db(dbName);
         console.log(`connected to ${db}`);
     })
-
 
 
 app.set('view engine', 'ejs') //setting our view engine to ejs so that the index.ejs file is rendered
