@@ -1,18 +1,8 @@
 const express = require('express');
 const app = express();
-//const MongoClient = require('mongodb').MongoClient
+const MongoClient = require('mongodb').MongoClient
 const PORT = process.env.PORT || 8000;
 require('dotenv').config();
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = process.env.DB_STRING;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
-
 
 let db, 
     dbConnectionStr = process.env.DB_STRING, 
@@ -21,6 +11,8 @@ let db,
 MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
     .then(client => {
         db = client.db(dbName);
+        const collection = db.collection('books')
+        //console.log(collection);
         console.log(`connected to ${db}`);
     })
 
