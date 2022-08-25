@@ -13,7 +13,7 @@ MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
         db = client.db(dbName);
         const collection = db.collection('books')
         //console.log(collection);
-        console.log(`connected to ${db}`);
+        console.log(`connected to ${dbName}`);
     })
 
 
